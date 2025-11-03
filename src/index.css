@@ -1,3 +1,158 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  /* Custom animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideOut {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes toastSlideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes toastSlideOut {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-fade-out {
+    animation: fadeOut 0.3s ease-out;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .animate-slide-out {
+    animation: slideOut 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  .animate-bounce-in {
+    animation: bounceIn 0.5s ease-out;
+  }
+
+  .animate-toast-in {
+    animation: toastSlideIn 0.3s ease-out;
+  }
+
+  .animate-toast-out {
+    animation: toastSlideOut 0.3s ease-out;
+  }
+
+  /* Stagger animation delay utility */
+  .stagger-1 {
+    animation-delay: 0.05s;
+  }
+
+  .stagger-2 {
+    animation-delay: 0.1s;
+  }
+
+  .stagger-3 {
+    animation-delay: 0.15s;
+  }
+
+  .stagger-4 {
+    animation-delay: 0.2s;
+  }
+
+  .stagger-5 {
+    animation-delay: 0.25s;
+  }
+
+  /* Dynamic stagger delays using CSS variables */
+  [data-stagger] {
+    animation-delay: calc(var(--stagger-index) * 0.05s);
+  }
+}

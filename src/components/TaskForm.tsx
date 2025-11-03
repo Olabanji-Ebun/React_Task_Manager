@@ -38,8 +38,12 @@ export function TaskForm({ onSubmit, editingTask, onCancel }: TaskFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 mb-6">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white rounded-lg shadow-md p-6 mb-6 animate-scale-in"
+      key={editingTask?.id || 'new'}
+    >
+      <h2 className="text-2xl font-bold mb-4 text-gray-800 animate-slide-in">
         {editingTask ? 'Edit Task' : 'Add New Task'}
       </h2>
 
@@ -55,7 +59,9 @@ export function TaskForm({ onSubmit, editingTask, onCancel }: TaskFormProps) {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
           placeholder="Enter task name"
         />
-        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+        {error && (
+          <p className="text-red-500 text-sm mt-1 animate-fade-in">{error}</p>
+        )}
       </div>
 
       <div className="mb-4">
@@ -75,7 +81,7 @@ export function TaskForm({ onSubmit, editingTask, onCancel }: TaskFormProps) {
       <div className="flex gap-2">
         <button
           type="submit"
-          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 font-medium hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
         >
           {editingTask ? 'Update Task' : 'Add Task'}
         </button>
@@ -84,7 +90,7 @@ export function TaskForm({ onSubmit, editingTask, onCancel }: TaskFormProps) {
           <button
             type="button"
             onClick={onCancel}
-            className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition font-medium"
+            className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all duration-200 font-medium hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
           >
             Cancel
           </button>

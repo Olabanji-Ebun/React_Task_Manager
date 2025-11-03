@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { TaskForm } from './components/TaskForm';
 import { TaskList } from './components/TaskList';
 import { SearchFilter } from './components/SearchFilter';
+import { ToastContainer } from './components/Toast';
 import { ClipboardList, Loader2 } from 'lucide-react';
 import { getAllTasks, addTask, updateTask, deleteTask } from './lib/indexeddb';
 import type { Task } from './types/database';
+import type { ToastType } from './components/Toast';
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -13,6 +15,9 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
   const [loading, setLoading] = useState(true);
+  const [toasts, setToasts] = useState<
+    Array<{ id: string; message: string; type: ToastType }>
+  >([]);
 
   useEffect(() => {
     loadTasks();
@@ -53,6 +58,15 @@ function App() {
     setFilteredTasks(filtered);
   };
 
+  const showToast = (message: string, type: ToastType) => {
+    const id = crypto.randomUUID();
+    setToasts((prev) => [...prev, { id, message, type }]);
+  };
+
+  const removeToast = (id: string) => {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
+  };
+
   const handleAddTask = async (name: string, description: string) => {
     try {
       const newTask = await addTask({
@@ -62,9 +76,10 @@ function App() {
         user_id: 'local',
       } as any);
       setTasks((prev) => [newTask, ...prev]);
+      showToast('Task added successfully!', 'success');
     } catch (error) {
       console.error('Error adding task:', error);
-      alert('Failed to add task. Please try again.');
+      showToast('Failed to add task. Please try again.', 'error');
     }
   };
 
@@ -80,9 +95,10 @@ function App() {
         prev.map((task) => (task.id === editingTask.id ? updatedTask : task))
       );
       setEditingTask(null);
+      showToast('Task updated successfully!', 'success');
     } catch (error) {
       console.error('Error updating task:', error);
-      alert('Failed to update task. Please try again.');
+      showToast('Failed to update task. Please try again.', 'error');
     }
   };
 
@@ -90,9 +106,10 @@ function App() {
     try {
       await deleteTask(taskId);
       setTasks((prev) => prev.filter((task) => task.id !== taskId));
+      showToast('Task deleted successfully!', 'success');
     } catch (error) {
       console.error('Error deleting task:', error);
-      alert('Failed to delete task. Please try again.');
+      showToast('Failed to delete task. Please try again.', 'error');
     }
   };
 
@@ -102,9 +119,13 @@ function App() {
       setTasks((prev) =>
         prev.map((task) => (task.id === taskId ? updatedTask : task))
       );
+      showToast(
+        completed ? 'Task marked as completed!' : 'Task marked as active!',
+        'success'
+      );
     } catch (error) {
       console.error('Error toggling task completion:', error);
-      alert('Failed to update task. Please try again.');
+      showToast('Failed to update task. Please try again.', 'error');
     }
   };
 
@@ -170,6 +191,7 @@ function App() {
           editingTaskId={editingTask?.id || null}
         />
       </div>
+      <ToastContainer toasts={toasts} onClose={removeToast} />
     </div>
   );
 }

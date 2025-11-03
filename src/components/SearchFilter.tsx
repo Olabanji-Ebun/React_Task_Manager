@@ -14,7 +14,7 @@ export function SearchFilter({
   onFilterChange,
 }: SearchFilterProps) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-5 mb-6">
+    <div className="bg-white rounded-lg shadow-md p-5 mb-6 animate-fade-in">
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex-1 relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -30,9 +30,9 @@ export function SearchFilter({
         <div className="flex gap-2">
           <button
             onClick={() => onFilterChange('all')}
-            className={`px-4 py-2 rounded-lg font-medium transition ${
+            className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105 active:scale-95 ${
               filter === 'all'
-                ? 'bg-blue-600 text-white'
+                ? 'bg-blue-600 text-white shadow-md'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -40,9 +40,9 @@ export function SearchFilter({
           </button>
           <button
             onClick={() => onFilterChange('active')}
-            className={`px-4 py-2 rounded-lg font-medium transition ${
+            className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105 active:scale-95 ${
               filter === 'active'
-                ? 'bg-blue-600 text-white'
+                ? 'bg-blue-600 text-white shadow-md'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -50,9 +50,9 @@ export function SearchFilter({
           </button>
           <button
             onClick={() => onFilterChange('completed')}
-            className={`px-4 py-2 rounded-lg font-medium transition ${
+            className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105 active:scale-95 ${
               filter === 'completed'
-                ? 'bg-blue-600 text-white'
+                ? 'bg-blue-600 text-white shadow-md'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
