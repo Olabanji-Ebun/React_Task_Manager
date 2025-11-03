@@ -167,6 +167,7 @@ function App() {
           onEdit={setEditingTask}
           onDelete={handleDeleteTask}
           onToggleComplete={handleToggleComplete}
+          editingTaskId={editingTask?.id || null}
         />
       </div>
     </div>

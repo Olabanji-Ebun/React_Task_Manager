@@ -6,9 +6,10 @@ interface TaskListProps {
   onEdit: (task: Task) => void;
   onDelete: (taskId: string) => void;
   onToggleComplete: (taskId: string, completed: boolean) => void;
+  editingTaskId: string | null;
 }
 
-export function TaskList({ tasks, onEdit, onDelete, onToggleComplete }: TaskListProps) {
+export function TaskList({ tasks, onEdit, onDelete, onToggleComplete, editingTaskId }: TaskListProps) {
   if (tasks.length === 0) {
     return (
       <div className="bg-white rounded-lg shadow-md p-8 text-center">
@@ -69,12 +70,18 @@ export function TaskList({ tasks, onEdit, onDelete, onToggleComplete }: TaskList
 
               <button
                 onClick={() => {
+                  if (editingTaskId === task.id) return;
                   if (confirm('Are you sure you want to delete this task?')) {
                     onDelete(task.id);
                   }
                 }}
-                className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition"
-                title="Delete task"
+                disabled={editingTaskId === task.id}
+                className={`p-2 rounded-lg transition ${
+                  editingTaskId === task.id
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : 'bg-red-100 text-red-600 hover:bg-red-200'
+                }`}
+                title={editingTaskId === task.id ? 'Cannot delete while editing' : 'Delete task'}
               >
                 <Trash2 className="w-5 h-5" />
               </button>
