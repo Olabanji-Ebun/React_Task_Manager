@@ -10,8 +10,8 @@ The Task Management App helps users organize their daily activities efficiently.
 - ✅ Add new tasks
 - 📝 Edit existing tasks
 - ❌ Delete tasks
-- 🔁 Mark tasks as completed or pending
-- 💾 Persist data using local storage (no backend required)
+- 🔁 Mark tasks as completed
+- 💾 Persist data using local storage 
 - 🔍 Search or filter through tasks easily
 
 ---
@@ -32,7 +32,7 @@ Follow these steps to set up and run the project locally:
 
 ## Clone the repository
 ```
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/Olabanji-Ebun/React_Task_Manager.git
 ```
 # Navigate into the project folder
 cd React_Task_Manager
