@@ -35,7 +35,9 @@ Follow these steps to set up and run the project locally:
 git clone https://github.com/Olabanji-Ebun/React_Task_Manager.git
 ```
 # Navigate into the project folder
+```
 cd React_Task_Manager
+```
 # Install dependencies
 ```
 npm install
